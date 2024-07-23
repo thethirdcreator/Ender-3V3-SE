@@ -515,15 +515,15 @@
 // Above this temperature the heater will be switched off.
 // This can protect components from overheating, but NOT from shorts and failures.
 // (Use MINTEMP for thermistor short/failure protection.)
-#define HEATER_0_MAXTEMP 275
-#define HEATER_1_MAXTEMP 275
-#define HEATER_2_MAXTEMP 275
-#define HEATER_3_MAXTEMP 275
-#define HEATER_4_MAXTEMP 275
-#define HEATER_5_MAXTEMP 275
-#define HEATER_6_MAXTEMP 275
-#define HEATER_7_MAXTEMP 275
-#define BED_MAXTEMP      110
+#define HEATER_0_MAXTEMP 315
+#define HEATER_1_MAXTEMP 315
+#define HEATER_2_MAXTEMP 315
+#define HEATER_3_MAXTEMP 315
+#define HEATER_4_MAXTEMP 315
+#define HEATER_5_MAXTEMP 315
+#define HEATER_6_MAXTEMP 315
+#define HEATER_7_MAXTEMP 315
+#define BED_MAXTEMP      120
 #define CHAMBER_MAXTEMP  60
 
 /**
@@ -872,11 +872,11 @@
  * Override with M203
  *                                      X, Y, Z, E0 [, E1[, E2...]]
  */
-#define DEFAULT_MAX_FEEDRATE          { 500, 500, 5, 30 }
+#define DEFAULT_MAX_FEEDRATE          { 250, 250, 15, 30 }
 
 #define LIMITED_MAX_FR_EDITING        // Limit edit via M203 or LCD to DEFAULT_MAX_FEEDRATE * 2
 #if ENABLED(LIMITED_MAX_FR_EDITING)
-  #define MAX_FEEDRATE_EDIT_VALUES    { 600, 600, 10, 50 } // ...or, set your own edit limits
+  #define MAX_FEEDRATE_EDIT_VALUES    { 600, 600, 20, 50 } // ...or, set your own edit limits
 #endif
 
 /**
@@ -887,7 +887,7 @@
  */
 #if ENABLED(HIGH_SPEED_1)
 // #define DEFAULT_MAX_ACCELERATION      { 3000, 3000, 100, 3000 }
-#define DEFAULT_MAX_ACCELERATION      { 4000, 4000, 4000, 4000 }
+#define DEFAULT_MAX_ACCELERATION      { 3000, 2000, 100, 4000 }
 #else 
 #define DEFAULT_MAX_ACCELERATION      { 3000, 3000, 100, 3000 }
 // #define DEFAULT_MAX_ACCELERATION      { 1500, 1500, 100, 1500 }
@@ -1161,11 +1161,11 @@
 #define XY_PROBE_FEEDRATE (160*60)//(80*60)
 
 // Feedrate (mm/min) for the first approach when double-probing (MULTIPLE_PROBING == 2)
-#define Z_PROBE_FEEDRATE_FAST (10*60)
+#define Z_PROBE_FEEDRATE_FAST (15*60)
 // #define Z_PROBE_FEEDRATE_FAST (4*60)
 
 // Feedrate (mm/min) for the "accurate" probe of each point
-#define Z_PROBE_FEEDRATE_SLOW (Z_PROBE_FEEDRATE_FAST / 2)
+#define Z_PROBE_FEEDRATE_SLOW (Z_PROBE_FEEDRATE_FAST / 3)
 
 /**
  * Probe Activation Switch
