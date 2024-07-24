@@ -872,11 +872,11 @@
  * Override with M203
  *                                      X, Y, Z, E0 [, E1[, E2...]]
  */
-#define DEFAULT_MAX_FEEDRATE          { 250, 250, 15, 30 }
+#define DEFAULT_MAX_FEEDRATE          { 300, 300, 10, 30 }
 
 #define LIMITED_MAX_FR_EDITING        // Limit edit via M203 or LCD to DEFAULT_MAX_FEEDRATE * 2
 #if ENABLED(LIMITED_MAX_FR_EDITING)
-  #define MAX_FEEDRATE_EDIT_VALUES    { 600, 600, 20, 50 } // ...or, set your own edit limits
+  #define MAX_FEEDRATE_EDIT_VALUES    { 600, 600, 20, 60 } // ...or, set your own edit limits
 #endif
 
 /**
@@ -887,7 +887,7 @@
  */
 #if ENABLED(HIGH_SPEED_1)
 // #define DEFAULT_MAX_ACCELERATION      { 3000, 3000, 100, 3000 }
-#define DEFAULT_MAX_ACCELERATION      { 3000, 2000, 100, 4000 }
+#define DEFAULT_MAX_ACCELERATION      { 4000, 4000, 100, 4000 }
 #else 
 #define DEFAULT_MAX_ACCELERATION      { 3000, 3000, 100, 3000 }
 // #define DEFAULT_MAX_ACCELERATION      { 1500, 1500, 100, 1500 }
@@ -1161,11 +1161,11 @@
 #define XY_PROBE_FEEDRATE (160*60)//(80*60)
 
 // Feedrate (mm/min) for the first approach when double-probing (MULTIPLE_PROBING == 2)
-#define Z_PROBE_FEEDRATE_FAST (15*60)
+#define Z_PROBE_FEEDRATE_FAST (10*60)
 // #define Z_PROBE_FEEDRATE_FAST (4*60)
 
 // Feedrate (mm/min) for the "accurate" probe of each point
-#define Z_PROBE_FEEDRATE_SLOW (Z_PROBE_FEEDRATE_FAST / 3)
+#define Z_PROBE_FEEDRATE_SLOW (Z_PROBE_FEEDRATE_FAST / 2)
 
 /**
  * Probe Activation Switch
@@ -1717,7 +1717,7 @@
 #endif
 
 // Homing speeds (mm/min)
-#define HOMING_FEEDRATE_MM_M { (50*60), (50*60), (4*60) }
+#define HOMING_FEEDRATE_MM_M { (50*60), (50*60), (6*60) }
 
 // Validate that endstops are triggered on homing moves
 #define VALIDATE_HOMING_ENDSTOPS
