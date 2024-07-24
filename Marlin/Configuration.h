@@ -1,5 +1,5 @@
 /**
- * 5000arlin 3D Printer Firmware
+ * Marlin 3D Printer Firmware
  * Copyright (c) 2020 MarlinFirmware [https://github.com/MarlinFirmware/Marlin]
  *
  * Based on Sprinter and grbl.
@@ -872,11 +872,11 @@
  * Override with M203
  *                                      X, Y, Z, E0 [, E1[, E2...]]
  */
-#define DEFAULT_MAX_FEEDRATE          { 500, 500, 10, 30 }
+#define DEFAULT_MAX_FEEDRATE          { 500, 500, 20, 30 }
 
 #define LIMITED_MAX_FR_EDITING        // Limit edit via M203 or LCD to DEFAULT_MAX_FEEDRATE * 2
 #if ENABLED(LIMITED_MAX_FR_EDITING)
-  #define MAX_FEEDRATE_EDIT_VALUES    { 600, 600, 20, 50 } // ...or, set your own edit limits
+  #define MAX_FEEDRATE_EDIT_VALUES    { 1000, 1000, 40, 60 } // ...or, set your own edit limits
 #endif
 
 /**
@@ -895,7 +895,7 @@
 #define LIMITED_MAX_ACCEL_EDITING     // Limit edit via M201 or LCD to DEFAULT_MAX_ACCELERATION * 2
 #if ENABLED(LIMITED_MAX_ACCEL_EDITING)
 #if ENABLED(HIGH_SPEED_1) 
-    #define MAX_ACCEL_EDIT_VALUES       { 8000, 8000, 200, 8000 } // ...or, set your own edit limits
+    #define MAX_ACCEL_EDIT_VALUES       { 8000, 8000, 8000, 8000 } // ...or, set your own edit limits
   #else 
    #define MAX_ACCEL_EDIT_VALUES       { 3000, 3000, 100, 3000 } // ...or, set your own edit limits
   #endif
@@ -951,7 +951,7 @@
   #endif
 #endif
 #if ENABLED(HIGH_SPEED_1)
-#define DEFAULT_EJERK 5.0  // May be used by Linear Advance
+#define DEFAULT_EJERK 10.0  // May be used by Linear Advance
 #else
 #define DEFAULT_EJERK 5.0  // May be used by Linear Advance
 #endif
@@ -1717,7 +1717,7 @@
 #endif
 
 // Homing speeds (mm/min)
-#define HOMING_FEEDRATE_MM_M { (50*60), (50*60), (6*60) }
+#define HOMING_FEEDRATE_MM_M { (50*60), (50*60), (8*60) }
 
 // Validate that endstops are triggered on homing moves
 #define VALIDATE_HOMING_ENDSTOPS
