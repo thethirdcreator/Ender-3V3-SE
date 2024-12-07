@@ -2258,7 +2258,7 @@ static uint16_t Choose_BG_Color(float offset_value)
   注意： if(0==Set_En && 0!=Set_BG_Color) 表示 只改变字体的背景色为Set_BG_Color，不改变选中块颜色
 */
   void Draw_Dots_On_Screen(xy_int8_t *mesh_Count,uint8_t Set_En,uint16_t Set_BG_Color)
-  { //计算位置，填充颜色，填充值
+  { //计算位置，填充颜色，填充值 //Рассчитать позицию, цвет заливки, значение заливки
     uint16_t value_LU_x,value_LU_y; 
     uint16_t rec_LU_x,rec_LU_y,rec_RD_x,rec_RD_y;
     uint16_t rec_fill_color;
@@ -2266,39 +2266,39 @@ static uint16_t Choose_BG_Color(float offset_value)
     static float first_num=0;
     if(HMI_flag.Need_boot_flag)z_offset_value=G29_level_num;
     else z_offset_value=z_values[mesh_Count->x][mesh_Count->y];
-    if(checkkey!=Leveling&&checkkey!=Level_Value_Edit)return;//只有在调平界面才运行显示调平值
+    if(checkkey!=Leveling&&checkkey!=Level_Value_Edit)return;//只有在调平界面才运行显示调平值 //Значение выравнивания может отображаться только в интерфейсе выравнивания.
      
-    //计算矩形区域 
+    //计算矩形区域  //Вычислить площадь прямоугольника
     rec_LU_x=Rect_LU_X_POS+mesh_Count->x*X_Axis_Interval;
     // rec_LU_y=Rect_LU_Y_POS+mesh_Count->y*Y_Axis_Interval;
     rec_LU_y=Rect_LU_Y_POS-mesh_Count->y*Y_Axis_Interval;
     rec_RD_x=Rect_RD_X_POS+mesh_Count->x*X_Axis_Interval;
     // rec_RD_y=Rect_RD_Y_POS+mesh_Count->y*Y_Axis_Interval;
     rec_RD_y=Rect_RD_Y_POS-mesh_Count->y*Y_Axis_Interval;
-    //补偿值的位置
+    //补偿值的位置 //Положение компенсационного значения
     value_LU_x=rec_LU_x+1;
     // value_LU_y=rec_LU_y+4;
     value_LU_y=rec_LU_y+(rec_RD_y-rec_LU_y)/2-6;
-    //填充颜色
-    if(!Set_En)rec_fill_color=Choose_BG_Color(z_offset_value);//自动设置
-    else if(1==Set_En)rec_fill_color=Set_BG_Color;  //手动填充选中块颜色，
+    //填充颜色 //цвет заливки
+    if(!Set_En)rec_fill_color=Choose_BG_Color(z_offset_value);//自动设置 //Устанавливается автоматически
+    else if(1==Set_En)rec_fill_color=Set_BG_Color;  //手动填充选中块颜色 //Вручную залейте выбранный цвет блока,
     else rec_fill_color=Select_Color;  //
 
     // if(mesh_Count->x==0 && mesh_Count->y==0) z_offset_value=-8.36;
    
-    if(2==Set_En) //  0==Set_En && 0==Set_BG_Color 才填充选中块颜色
+    if(2==Set_En) //  0==Set_En && 0==Set_BG_Color 才填充选中块颜色 //Заливка только выбранного цвета блока
     {
       DWIN_Draw_Rectangle(1, Color_Bg_Black, rec_LU_x, rec_LU_y, rec_RD_x, rec_RD_y);
-      DWIN_Draw_Rectangle(0, rec_fill_color, rec_LU_x, rec_LU_y, rec_RD_x, rec_RD_y); //选中块为黑色
-      DWIN_Draw_Z_Offset_Float(font6x12,Color_White,rec_fill_color, 1, 2, value_LU_x, value_LU_y,z_offset_value*100);//左上角坐标
+      DWIN_Draw_Rectangle(0, rec_fill_color, rec_LU_x, rec_LU_y, rec_RD_x, rec_RD_y); //选中块为黑色 //Выбранный блок черный
+      DWIN_Draw_Z_Offset_Float(font6x12,Color_White,rec_fill_color, 1, 2, value_LU_x, value_LU_y,z_offset_value*100);//左上角坐标 //Координаты левого верхнего угла
     }
     else if(1==Set_En)
     {
       // DWIN_Draw_Rectangle(1, Color_Bg_Black, rec_LU_x, rec_LU_y, rec_RD_x, rec_RD_y);
       DWIN_Draw_Rectangle(1, rec_fill_color, rec_LU_x, rec_LU_y, rec_RD_x, rec_RD_y);    
-      DWIN_Draw_Z_Offset_Float(font6x12, Color_Bg_Black,rec_fill_color, 1, 2, value_LU_x, value_LU_y,z_offset_value*100);//左上角坐标
+      DWIN_Draw_Z_Offset_Float(font6x12, Color_Bg_Black,rec_fill_color, 1, 2, value_LU_x, value_LU_y,z_offset_value*100);//左上角坐标 //Координаты левого верхнего угла
     }    
-    else //  0==Set_En && 0==Set_BG_Color 才填充选中块颜色
+    else //  0==Set_En && 0==Set_BG_Color 才填充选中块颜色 //Заливка только выбранного цвета блока
     {
       // PRINT_LOG("rec_LU_x = ", rec_LU_x, "rec_LU_y =", rec_LU_y," rec_RD_x = ", rec_RD_x,"rec_RD_y = ", rec_RD_y);
       DWIN_Draw_Rectangle(1, Color_Bg_Black, rec_LU_x, rec_LU_y, rec_RD_x, rec_RD_y);
@@ -2306,28 +2306,28 @@ static uint16_t Choose_BG_Color(float offset_value)
       if(HMI_flag.Need_boot_flag)
       {        
         if(z_offset_value<10)
-        DWIN_Draw_Z_Offset_Float(font6x12, rec_fill_color,Color_Bg_Black, 2, 0, value_LU_x+2, value_LU_y,z_offset_value);//左上角坐标
+        DWIN_Draw_Z_Offset_Float(font6x12, rec_fill_color,Color_Bg_Black, 2, 0, value_LU_x+2, value_LU_y,z_offset_value);//左上角坐标 //Координаты левого верхнего угла
         else 
-        DWIN_Draw_Z_Offset_Float(font6x12, rec_fill_color,Color_Bg_Black, 2, 0, value_LU_x+6, value_LU_y,z_offset_value);//左上角坐标
+        DWIN_Draw_Z_Offset_Float(font6x12, rec_fill_color,Color_Bg_Black, 2, 0, value_LU_x+6, value_LU_y,z_offset_value);//左上角坐标 //Координаты левого верхнего угла
       }
       else  
       {
-        DWIN_Draw_Z_Offset_Float(font6x12, rec_fill_color/*Color_White*/,Color_Bg_Black, 1, 2, value_LU_x, value_LU_y,z_offset_value*100);//左上角坐标
+        DWIN_Draw_Z_Offset_Float(font6x12, rec_fill_color/*Color_White*/,Color_Bg_Black, 1, 2, value_LU_x, value_LU_y,z_offset_value*100);//左上角坐标 //Координаты левого верхнего угла
       }
              
     }    
   }
   
-  void Refresh_Leveling_Value()  //刷新调平值
+  void Refresh_Leveling_Value()  //刷新调平值 //Обновить значения выравнивания
   {  
     xy_int8_t Grid_Count={0};
     for(Grid_Count.x=0;Grid_Count.x<GRID_MAX_POINTS_X;Grid_Count.x++)
     {
-      // if(2==Grid_Count.x)delay(50); //必须有这个参数，否则会刷新不正常
+      // if(2==Grid_Count.x)delay(50); //必须有这个参数，否则会刷新不正常 //Этот параметр должен присутствовать, иначе обновление будет ненормальным.
       for(Grid_Count.y=0;Grid_Count.y<GRID_MAX_POINTS_Y;Grid_Count.y++)
       {        
         Draw_Dots_On_Screen(&Grid_Count,0,0);
-        delay(20); //必须有这个参数，否则会刷新不正常
+        delay(20); //必须有这个参数，否则会刷新不正常 //Этот параметр должен присутствовать, иначе обновление будет ненормальным.
       }
     }
   }
@@ -5735,7 +5735,7 @@ void HMI_Control()
 }
 
 #if HAS_ONESTEP_LEVELING
-//改变调平值
+//改变调平值 //Изменить значение выравнивания
 void HMI_Levling_Change()
 {
     uint16_t rec_LU_x,rec_LU_y,rec_RD_x,rec_RD_y,value_LU_x,value_LU_y; 
@@ -5743,23 +5743,23 @@ void HMI_Levling_Change()
     if ((encoder_diffState == ENCODER_DIFF_NO)) return;
     else 
     {
-      xy_int8_t mesh_Count=Converted_Grid_Point(select_level.now);    //转换网格点   
-           //计算矩形区域 
+      xy_int8_t mesh_Count=Converted_Grid_Point(select_level.now);    //转换网格点  //Преобразование точек сетки
+      //计算矩形区域 //Вычислить площадь прямоугольника
       rec_LU_x=Rect_LU_X_POS+mesh_Count.x*X_Axis_Interval;
       // rec_LU_y=Rect_LU_Y_POS+mesh_Count.y*Y_Axis_Interval;
       rec_LU_y=Rect_LU_Y_POS-mesh_Count.y*Y_Axis_Interval;
       rec_RD_x=Rect_RD_X_POS+mesh_Count.x*X_Axis_Interval;
       // rec_RD_y=Rect_RD_Y_POS+mesh_Count.y*Y_Axis_Interval;
       rec_RD_y=Rect_RD_Y_POS-mesh_Count.y*Y_Axis_Interval;
-      //补偿值的位置
+      //补偿值的位置 //Положение компенсационного значения
       value_LU_x=rec_LU_x+1;
       // value_LU_y=rec_LU_y+4;
       value_LU_y=rec_LU_y+(rec_RD_y-rec_LU_y)/2-6;   
-      if (Apply_Encoder(encoder_diffState, HMI_ValueStruct.Temp_Leveling_Value)) //点击了确认键 
+      if (Apply_Encoder(encoder_diffState, HMI_ValueStruct.Temp_Leveling_Value)) //点击了确认键 //Нажал кнопку подтверждения
       {
         checkkey = Leveling;
-        Draw_Leveling_Highlight(true);  //默认选择框到编辑
-        // Refresh_Leveling_Value();    //刷新调平值和颜色到屏幕上
+        Draw_Leveling_Highlight(true);  //默认选择框到编辑 //Поле выбора по умолчанию для редактирования
+        // Refresh_Leveling_Value();    //刷新调平值和颜色到屏幕上 //Вывод значений и цветов выравнивания на экран
         z_values[mesh_Count.x][mesh_Count.y]=HMI_ValueStruct.Temp_Leveling_Value/100;
         // refresh_bed_level();
         // xy_int8_t mesh_Count=Converted_Grid_Point(select_level.now);    //转换网格点
@@ -5770,9 +5770,9 @@ void HMI_Levling_Change()
         // Draw_Dots_On_Screen(&mesh_Count,1,Select_Block_Color); 
         HMI_ValueStruct.Temp_Leveling_Value=z_values[mesh_Count.x][mesh_Count.y]*100;
         //SERIAL_ECHOLNPAIR("HMI_ValueStruct.Temp_Leveling_Value22:", z_values[mesh_Count.x][mesh_Count.y]);
-        DWIN_Draw_Z_Offset_Float(font6x12,Color_White,Select_Color, 1, 2, value_LU_x, value_LU_y,HMI_ValueStruct.Temp_Leveling_Value);//左上角坐标 
-        Draw_Dots_On_Screen(&mesh_Count,0,0); //将当前选中块置为不选中
-        DO_BLOCKING_MOVE_TO_Z(5, 5);//每次都上升到5mm的高度再移动         
+        DWIN_Draw_Z_Offset_Float(font6x12,Color_White,Select_Color, 1, 2, value_LU_x, value_LU_y,HMI_ValueStruct.Temp_Leveling_Value);//左上角坐标 //Координаты верхнего левого угла 
+        Draw_Dots_On_Screen(&mesh_Count,0,0); //将当前选中块置为不选中 //Сделать текущий выбранный блок невыделенным
+        DO_BLOCKING_MOVE_TO_Z(5, 5);//每次都上升到5mm的高度再移动  //Каждый раз перед перемещением поднимайте на высоту 5 мм.        
       }
       else 
       {
@@ -5787,7 +5787,7 @@ void HMI_Levling_Change()
       }
     }
 }
-//编辑调平数据页面
+//编辑调平数据页面 //Страница редактирования данных о выравнивании
   void HMI_Leveling_Edit()
   {
     uint16_t rec_LU_x,rec_LU_y,rec_RD_x,rec_RD_y,value_LU_x,value_LU_y; 
@@ -5799,11 +5799,11 @@ void HMI_Levling_Change()
       {
         Level_Scroll_Menu(DWIN_SCROLL_UP,select_level.now);        
       }
-      //选中增加逻辑
+      //选中增加逻辑 //Выберите Добавить логику.
     }
     else if (encoder_diffState == ENCODER_DIFF_CCW)
     {
-      //选中减少逻辑
+      //选中减少逻辑 //Проверьте логику сокращения
       if (select_level.dec()) 
       {
         Level_Scroll_Menu(DWIN_SCROLL_DOWN,select_level.now);
@@ -5811,8 +5811,8 @@ void HMI_Levling_Change()
     }
     else if (encoder_diffState == ENCODER_DIFF_ENTER) 
     {
-       xy_int8_t mesh_Count=Converted_Grid_Point(select_level.now);    //转换网格点   
-           //计算矩形区域 
+       xy_int8_t mesh_Count=Converted_Grid_Point(select_level.now);    //转换网格点 //Преобразование точек сетки
+           //计算矩形区域 //Вычислить площадь прямоугольника
       rec_LU_x=Rect_LU_X_POS+mesh_Count.x*X_Axis_Interval;
       // rec_LU_y=Rect_LU_Y_POS+mesh_Count.y*Y_Axis_Interval;
       rec_LU_y=Rect_LU_Y_POS-mesh_Count.y*Y_Axis_Interval;
@@ -5850,11 +5850,11 @@ void HMI_Levling_Change()
       Draw_Leveling_Highlight(true);
     else if (encoder_diffState == ENCODER_DIFF_ENTER) 
     {
-      if(HMI_flag.select_flag) //点击编辑
+      if(HMI_flag.select_flag) //点击编辑 //Нажмите, чтобы изменить
       {
         if(!HMI_flag.power_back_to_zero_flag)
         {
-          HMI_flag.leveling_edit_home_flag=true;//调平编辑回零中，禁止其他操作
+          HMI_flag.leveling_edit_home_flag=true;//调平编辑回零中，禁止其他操作 //Выравнивание и редактирование обнуляются, а другие операции запрещаются.
           HMI_flag.power_back_to_zero_flag = true;
            checkkey = Last_Prepare;
            Popup_Window_Home();
@@ -5868,16 +5868,16 @@ void HMI_Levling_Change()
           xy_int8_t mesh_Count={0,0};
           Draw_Dots_On_Screen(&mesh_Count,1,Select_Block_Color);          
           EncoderRate.enabled = true;
-          DO_BLOCKING_MOVE_TO_Z(5, 5);//每次都上升到5mm的高度再移动
+          DO_BLOCKING_MOVE_TO_Z(5, 5);//每次都上升到5mm的高度再移动 //Каждый раз перед перемещением поднимайте на высоту 5 мм.
         }
       }
-      else //点击确定
+      else //点击确定 //Нажмите ОК
       {
         gcode.process_subcommands_now_P(PSTR("M420 S1"));
         refresh_bed_level();
-        settings.save();   //保存编辑好的调平数据到EEPROM
+        settings.save();   //保存编辑好的调平数据到EEPROM //Сохраните отредактированные данные нивелира в EEPROM.
         delay(100);
-        HMI_flag.G29_finish_flag=false;  //退出编辑页面，进入调平页面开始也不允许转动旋钮
+        HMI_flag.G29_finish_flag=false;  //退出编辑页面，进入调平页面开始也不允许转动旋钮 //Даже после выхода со страницы редактирования и входа на страницу прокачки поворот ручки не допускается.
         if(HMI_flag.Edit_Only_flag)
         {
           HMI_flag.Edit_Only_flag=false;
@@ -5887,7 +5887,7 @@ void HMI_Levling_Change()
         }
         else
         {
-          Goto_MainMenu();//回到主界面
+          Goto_MainMenu();//回到主界面 //Вернитесь в основной интерфейс
         } 
         // HMI_flag.Refresh_bottom_flag=false;//标志不刷新底部参数
         // Draw_Mid_Status_Area(true); //rock_20230529 //更新一次全部参数       
